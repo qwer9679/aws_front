@@ -6,7 +6,7 @@ on:
 
 env:
   AWS_REGION: ap-northeast-2
-  ECR_REPOSITORY: aws-lab-frontend # [주의] ECR에 이 이름으로 리포지토리를 미리 만들어야 합니다.
+  ECR_REPOSITORY: aws-lab-app # [주의] ECR에 이 이름으로 리포지토리를 미리 만들어야 합니다.
 
 jobs:
   deploy:
@@ -57,8 +57,8 @@ jobs:
           sudo docker rm frontend-app || true
           
           # 새 이미지 Pull 및 실행 (80포트로 서비스)
-          sudo docker pull ${{ steps.login-ecr.outputs.registry }}/aws-lab-frontend:latest
-          sudo docker run -d --name frontend-app -p 80:80 ${{ steps.login-ecr.outputs.registry }}/aws-lab-frontend:latest
+          sudo docker pull ${{ steps.login-ecr.outputs.registry }}/aws-lab-app:latest
+          sudo docker run -d --name frontend-app -p 80:80 ${{ steps.login-ecr.outputs.registry }}/aws-lab-app:latest
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
